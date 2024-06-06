@@ -152,12 +152,10 @@ switch (day) {
 //   sum += 1;
 // }
 
-// CONTINUE ======================================================
-// melakukan skip pada looping
+// CONTINUE -> melakukan skip pada looping ========================================
 
 for (let i = 0; i < 5; i++) {
   if (i === 3) continue;
 
   console.log("i = " + i);
 }
- 
