@@ -165,3 +165,147 @@ console.log(mySet.size);
     if an attempt is made to remove the "masinis," "train empty" if the train is already empty, and 
     "passenger not found" if the passenger with the given name is not found on the train.
 */
+
+// no 1
+function phoneNumber(input) {
+  if (typeof input !== "string") {
+    return "invalid phone number";
+  }
+
+  if (input.length !== 12) {
+    return "invalid phone number";
+  }
+
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] < Number("0") || input[i] > Number("9")) {
+      return "invalid phone number";
+    }
+  }
+
+  input = "62" + input.slice(1);
+  let template = "(xxxx)-xxxx-xxxxx";
+
+  input.split("").forEach((item) => {
+    template = template.replace("x", item);
+  });
+
+  return template;
+}
+
+console.log(phoneNumber("085244455555"));
+
+// no 2
+class BankQueue {
+  constructor() {
+    this.queue = [];
+  }
+
+  isEmpty() {
+    return this.queue.length === 0;
+  }
+
+  enqueue(input) {
+    this.queue.push(input);
+    return "enqueue success";
+  }
+
+  dequeue() {
+    if (this.isEmpty()) {
+      return "antrian kosong";
+    }
+    this.queue.shift();
+
+    return "dequeue success";
+  }
+
+  size() {
+    return `jumlah antrian ${this.queue.length}`;
+  }
+}
+
+// membuat instansi baru berdasarkan class BankQueue
+const bankQueue = new BankQueue();
+
+// menambahkan nasabah ke antrian
+console.log(bankQueue.enqueue(1));
+console.log(bankQueue.enqueue(2));
+console.log(bankQueue.enqueue(3));
+
+// melihat isi antrian
+console.log(bankQueue.size());
+
+// memanggil nasabah atau mengurangi antrian
+console.log(bankQueue.dequeue());
+console.log(bankQueue.dequeue());
+console.log(bankQueue.dequeue());
+console.log(bankQueue.dequeue());
+
+// melihat isi antrian
+console.log(bankQueue.size());
+
+// no 3
+class Train {
+  constructor() {
+    this.container = ["masinis"];
+    this.maxSize = 10;
+  }
+
+  isFull() {
+    return this.container.length === this.maxSize;
+  }
+
+  isEmpty() {
+    return this.container.length === 1;
+  }
+
+  showPassenger() {
+    return {
+      passenger: this.container,
+      remainingSeat: this.maxSize - this.container.length,
+    };
+  }
+
+  passengerIn(name) {
+    if (this.isFull()) {
+      return "train full";
+    }
+
+    if (this.container.includes(name)) {
+      return "passenger already exist";
+    }
+
+    this.container.push(name);
+    return "add passenger success";
+  }
+
+  passengerOut(name) {
+    if (name === "masinis") {
+      return "cannot remove masinis";
+    }
+
+    if (this.isEmpty()) {
+      return "train is empty";
+    }
+
+    const index = this.container.indexOf(name);
+
+    if (index === -1) {
+      return "passenger not found";
+    }
+
+    this.container.splice(index, 1);
+    return "remove passenger success";
+  }
+}
+
+const train = new Train();
+
+// memasukkan penumpang baru
+console.log(train.passengerIn("asep"));
+console.log(train.passengerIn("siti"));
+
+// mengeluarkan penumpang
+console.log(train.passengerOut("siti"));
+
+// melihat jumlah penumpang
+console.log(train.showPassenger());
