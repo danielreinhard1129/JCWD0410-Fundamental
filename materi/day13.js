@@ -120,3 +120,19 @@ const myFunction = () => {
 const data = "ini adalah data";
 
 module.exports = { myFunction, data }; // export data supaya bisa digunakan di file lain
+
+// HOISTING -> var dan function declaration
+
+console.log(test);
+
+var test = "john";
+console.log(test);
+let test1 = "test";
+
+// test2();
+const test2 = () => {};
+
+function sayHello() {
+  console.log("hello");
+}
+sayHello();
